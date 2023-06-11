@@ -1,11 +1,11 @@
-const { readJSONFile, writeJSONFile } = require("./src/helpers");
-const {getClothingName, getClothingPrice, getClothingInStock} = require("./src/faker-helpers");
+const { readJSONFile, writeJSONFile } = require("./helpers");
+const {getClothingName, getClothingPrice, getClothingInStock} = require("./faker-helpers");
 const { nanoid } = require("nanoid");
 
 function create(clothes, clothesSize) {
-    const clothing = { name: getClothingName, 
-        priceInCents: getClothingPrice,
-        inStock: getClothingInStock,
+    const clothing = { name: getClothingName(), 
+        priceInCents: getClothingPrice(),
+        inStock: getClothingInStock(),
         size: clothesSize,
         id: nanoid(4)
     };
@@ -14,12 +14,13 @@ function create(clothes, clothesSize) {
 }
 
 function index(clothes) {
-    return clothes.map((clothing) => "id " + clothing.id + "name " + clothing.name + "priceInCents " + clothing.priceInCents + "inStock " + clothing.InStock + "size " + clothing.size).join("\n");
+    return clothes.map((clothing) => "id " + clothing.id + " name " + clothing.name + " priceInCents " + clothing.priceInCents + " inStock " + clothing.inStock + " size " + clothing.size).join("\n");
 }
 
 function show(clothes, clothingId) {
     const foundClothing = clothes.find((clothing) => clothing.id === clothingId);
-    return "id " + foundClothing.id + "name " + foundClothing.name + "priceInCents " + foundClothing.priceInCents + "inStock " + foundClothing.inStock + "size " + foundClothing.size;
+    const {id, name, priceInCents, inStock, size} = foundClothing;
+    return "id " + id + " name " + name + " priceInCents " + priceInCents + " inStock " + inStock + " size " + size;
 }
 
 function destroy(clothes, clothingId) {
@@ -33,11 +34,10 @@ function destroy(clothes, clothingId) {
    }
 }
 
-function update(clothes, clothingId, updatedClothing, updatedClothingPrice, clothingInStock, clothingSize) {
+function update(clothes, clothingId, updatedClothingPrice, clothingInStock, clothingSize) {
     const index =  clothes.findIndex((clothing) => clothing.id === clothingId);
     if (index > -1) {
        clothes[index].id = clothingId;
-       clothes[index].name = updatedClothing;
        clothes[index].priceInCents = updatedClothingPrice;
        clothes[index].inStock = clothingInStock;
        clothes[index].size = clothingSize;
@@ -53,9 +53,10 @@ function addToCart(cart, clothes, clothingId) {
     if(item) {
         cart.push(item);
     }
+    return cart;
 }
 
-function cancelCart(cart) {
+function cancelCart() {
     writeJSON("./data","cart-data.json",[]);
 }
 

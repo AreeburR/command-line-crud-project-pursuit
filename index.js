@@ -24,7 +24,7 @@ const run = () => {
             console.log(allClothes);
             break;   
         case "create" :
-            updatedclothes = create(clothes, clothing);
+            updatedClothes = create(clothes, clothing);
             writeToFile = true;
             break;
         case "show" :
@@ -33,7 +33,7 @@ const run = () => {
             break;  
         case "update" :
             console.log(clothing,  "is being updated");
-            updatedClothes = update(clothes, clothing, process.argv[4], process.argv[5], process.argv[6], process.argv[7], process.argv[8]);
+            updatedClothes = update(clothes, clothing, process.argv[4], process.argv[5], process.argv[6], process.argv[7]);
             writeToFile = true;
             break; 
         case "destroy" :
@@ -44,7 +44,7 @@ const run = () => {
             
             break;
         case "cancelCart" :
-
+            cancelCart();
             break;
         default :
         console.log("there was an error");

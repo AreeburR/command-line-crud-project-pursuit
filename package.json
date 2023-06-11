@@ -4,7 +4,7 @@
     "jest": "^29.5.0"
   },
   "name": "command-line-crud-project-pursuit",
-  "description": "",
+  "description": "this application allows a user to create, read, update, and destroy product items. It was initially suppossed to be just clothes but with faker it is just random products",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
@@ -202,7 +202,9 @@
     "create": "node index.js create",
     "show": "node index.js show",
     "update": "node index.js update",
-    "destroy": "node index.js destroy"
+    "destroy": "node index.js destroy",
+    "addToCart": "node index.js addToCart",
+    "cancelCart": "node index.js cancelCart"
   },
   "author": "Areebur Rahman",
   "license": "ISC"
