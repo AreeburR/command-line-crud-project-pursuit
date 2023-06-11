@@ -1,4 +1,4 @@
-const { readJSONFile, writeJSONFile } = require("./helpers");
+const { writeJSONFile } = require("./helpers");
 const {getClothingName, getClothingPrice, getClothingInStock} = require("./faker-helpers");
 const { nanoid } = require("nanoid");
 
@@ -56,6 +56,14 @@ function addToCart(cart, clothes, clothingId) {
     return cart;
 }
 
+function cartTotal(cart) {
+    let totalPrice = 0;
+    for(let item of cart) {
+        totalPrice += Number(item.priceInCents);
+    }
+    return totalPrice;
+}
+
 function cancelCart() {
     writeJSONFile("./data","cart-data.json",[]);
 }
@@ -68,5 +76,6 @@ module.exports = {
    destroy,
    update,
    addToCart,
+   cartTotal,
    cancelCart
 }

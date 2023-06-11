@@ -6,6 +6,7 @@ const {
     destroy,
     update,
     addToCart,
+    cartTotal,
     cancelCart
 } = require("./src/clothes-controller")
 
@@ -44,6 +45,9 @@ const run = () => {
         case "addToCart" :
             updatedCart = addToCart(cart, clothes, clothing)
             writeJSONFile("./data", "cart-data.json", updatedCart);
+            break;
+        case "cartTotal" :
+            console.log(cartTotal(cart));
             break;
         case "cancelCart" :
             cancelCart();
