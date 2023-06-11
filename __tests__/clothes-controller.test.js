@@ -5,8 +5,7 @@ const {
    destroy,
    update,
    addToCart,
-   cartTotal,
-   cancelCart
+   cartTotal
 } = require("../src/clothes-controller");
 const cartData = require("../data/sample-cart-data.json");
 const clothesData = require("../data/sample-clothes-data.json");
