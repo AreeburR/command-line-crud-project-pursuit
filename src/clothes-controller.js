@@ -1,10 +1,11 @@
+const { readJSONFile, writeJSONFile } = require("./src/helpers");
+const {getClothingName, getClothingPrice, getClothingInStock} = require("./src/faker-helpers");
 const { nanoid } = require("nanoid");
 
-
-function create (clothes, clothesName, clothesPriceInCents, clothesInStock, clothesSize) {
-    const clothing = { name: clothesName, 
-        priceInCents: clothesPriceInCents,
-        inStock:  clothesInStock,
+function create(clothes, clothesSize) {
+    const clothing = { name: getClothingName, 
+        priceInCents: getClothingPrice,
+        inStock: getClothingInStock,
         size: clothesSize,
         id: nanoid(4)
     };
@@ -12,16 +13,16 @@ function create (clothes, clothesName, clothesPriceInCents, clothesInStock, clot
     return clothes;
 }
 
-function index (clothes) {
+function index(clothes) {
     return clothes.map((clothing) => "id " + clothing.id + "name " + clothing.name + "priceInCents " + clothing.priceInCents + "inStock " + clothing.InStock + "size " + clothing.size).join("\n");
 }
 
-function show (clothes, clothingId) {
-    const foundClothing = clothes.find((clothing) => clothing.id === clothingId) ;
+function show(clothes, clothingId) {
+    const foundClothing = clothes.find((clothing) => clothing.id === clothingId);
     return "id " + foundClothing.id + "name " + foundClothing.name + "priceInCents " + foundClothing.priceInCents + "inStock " + foundClothing.inStock + "size " + foundClothing.size;
 }
 
-function destroy (clothes, clothingId) {
+function destroy(clothes, clothingId) {
    const index =  clothes.findIndex((clothing) => clothing.id === clothingId);
    if (index > -1) {
     clothes.splice(index, 1);
@@ -32,7 +33,7 @@ function destroy (clothes, clothingId) {
    }
 }
 
-function update (clothes, clothingId, updatedClothing, updatedClothingPrice, clothingInStock, clothingSize) {
+function update(clothes, clothingId, updatedClothing, updatedClothingPrice, clothingInStock, clothingSize) {
     const index =  clothes.findIndex((clothing) => clothing.id === clothingId);
     if (index > -1) {
        clothes[index].id = clothingId;
@@ -45,7 +46,17 @@ function update (clothes, clothingId, updatedClothing, updatedClothingPrice, clo
    } else {
      console.log("clothing with that id could not be found");
     }
-   
+}
+
+function addToCart(cart, clothes, clothingId) {
+    const item = clothes.find((clothing) => clothing.id === clothingId);
+    if(item) {
+        cart.push(item);
+    }
+}
+
+function cancelCart(cart) {
+    writeJSON("./data","cart-data.json",[]);
 }
 
 
@@ -54,5 +65,7 @@ module.exports = {
    index, 
    show,
    destroy,
-   update
+   update,
+   addToCart,
+   cancelCart
 }
