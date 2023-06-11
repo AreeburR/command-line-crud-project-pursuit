@@ -57,7 +57,7 @@ function addToCart(cart, clothes, clothingId) {
 }
 
 function cancelCart() {
-    writeJSON("./data","cart-data.json",[]);
+    writeJSONFile("./data","cart-data.json",[]);
 }
 
 

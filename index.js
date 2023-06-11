@@ -17,6 +17,7 @@ const run = () => {
     let cart = readJSONFile("./data", "cart-data.json");
     let writeToFile = false;
     let updatedClothes = [];
+    let updatedCart = [];
 
     switch (action) {
         case "index" :
@@ -33,7 +34,7 @@ const run = () => {
             break;  
         case "update" :
             console.log(clothing,  "is being updated");
-            updatedClothes = update(clothes, clothing, process.argv[4], process.argv[5], process.argv[6], process.argv[7]);
+            updatedClothes = update(clothes, clothing, process.argv[4], process.argv[5], process.argv[6]);
             writeToFile = true;
             break; 
         case "destroy" :
@@ -41,7 +42,8 @@ const run = () => {
             writeToFile = true;
             break ;  
         case "addToCart" :
-            
+            updatedCart = addToCart(cart, clothes, clothing)
+            writeJSONFile("./data", "cart-data.json", updatedCart);
             break;
         case "cancelCart" :
             cancelCart();
